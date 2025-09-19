@@ -35,7 +35,7 @@ public class UniverseController : MonoBehaviour
 
         //Update the universe position based on the camera position
         //Use this to see if camera is close to story point
-        universePosition = cameraTransform.position;
+        universePosition = new Vector3(cameraTransform.position.x, cameraTransform.position.y, cameraComponent.orthographicSize);
     }
 
     float currentZoom;
