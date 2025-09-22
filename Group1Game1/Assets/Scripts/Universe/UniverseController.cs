@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using TMPro;
 using UnityEngine;
 
@@ -19,6 +19,25 @@ public class UniverseController : MonoBehaviour
     [Min(0f), SerializeField] float maxY = 5f;
     public static float MaxY;
 
+    [Header("Clock Settings")]
+    [SerializeField, Min(0f)] float dialMoveDamp = 8f;  // higher = quicker decay
+    [SerializeField, Min(0f)] float dialZoomDamp = 8f;  // higher = quicker decay
+
+    // How strong dial input can get per frame
+    [SerializeField] float dialMoveClamp = 1.5f;
+    [SerializeField] float dialZoomClamp = 10f;
+
+    public void OnDialMove(float dx, float dy)
+    {
+        dialMove.x = Mathf.Clamp(dialMove.x + dx, -dialMoveClamp, dialMoveClamp);
+        dialMove.y = Mathf.Clamp(dialMove.y + dy, -dialMoveClamp, dialMoveClamp);
+    }
+
+    public void OnDialZoom(float dz)
+    {
+        dialZoom = Mathf.Clamp(dialZoom + dz, -dialZoomClamp, dialZoomClamp);
+    }
+
     [Header("References")]
     [SerializeField] Transform cameraTransform;
     [SerializeField] Camera cameraComponent;
@@ -31,6 +50,9 @@ public class UniverseController : MonoBehaviour
     Vector2 moveInput;
     float zoomInput;
 
+    Vector2 dialMove;           // accumulated from dials this frame
+    float dialZoom;             // accumulated from dials this frame
+
     private void Awake()
     {
         MinZoom = minZoom;
@@ -41,26 +63,26 @@ public class UniverseController : MonoBehaviour
 
     private void Update()
     {
-        //Read input from keyboard or other input systems (clamped -1/1 for X, Y, and zoom)
-        moveInput = ReadKeyInputMove();
-        zoomInput = ReadZoomInputMove();
+        var keyMove = ReadKeyInputMove();
+        var keyZoom = ReadZoomInputMove();
 
-        if (!canMove)
-            return;
+        moveInput = keyMove + dialMove;
+        zoomInput = keyZoom + dialZoom;
 
-        //Use this function here to apply movement and zoom to the camera
+        if (!canMove) return;
+
         ApplyMovement(moveInput, zoomInput);
 
-        //Update the universe position based on the camera position
-        //Use this to see if camera is close to story point
+        float dampPos = Mathf.Exp(-dialMoveDamp * Time.deltaTime);
+        float dampZoom = Mathf.Exp(-dialZoomDamp * Time.deltaTime);
+        dialMove *= dampPos;
+        dialZoom *= dampZoom;
+
+        // existing position → universePosition UI
         universePosition = new Vector3(cameraTransform.position.x, cameraTransform.position.y, cameraComponent.orthographicSize);
-        //cameraText.text = $"Day: {LocationInSpace.GetDayString(universePosition.x)} " +
-        //    $"Month: {LocationInSpace.GetMonthString(universePosition.y)} " +
-        //    $"Year: {universePosition.z:0.0}";
-        cameraText.text = $"Day: {universePosition.x:0.0} " +
-            $"Month: {universePosition.y:0.0} " +
-            $"Year: {universePosition.z:0.0}";
+        cameraText.text = $"Day: {universePosition.x:0.0} Month: {universePosition.y:0.0} Year: {universePosition.z:0.0}";
     }
+
 
     float currentZoom;
     float currentZoom01 => Mathf.InverseLerp(minZoom, maxZoom, currentZoom);
