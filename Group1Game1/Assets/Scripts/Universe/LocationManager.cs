@@ -10,6 +10,17 @@ public class LocationManager : MonoBehaviour
     [SerializeField] List<LocationInSpace> locations = new();
     public List<LocationInSpace> Locations => locations;
 
+    [SerializeField] GameObject starPrefab;
+
+    private void Start()
+    {
+        foreach (var loc in locations)
+        {
+            var star = Instantiate(starPrefab, transform);
+            star.transform.position = new Vector3(loc.Xday, loc.Ymonth, -1);
+        }
+    }
+
     //Not Optimized but ok for this small game
     private void Update()
     {
@@ -29,8 +40,10 @@ public class LocationInSpace
 {
     [SerializeField] string locationName;
     [SerializeField] float xDay;
+    public float Xday => xDay;
     [SerializeField] string dayString => GetDayString(xDay);
     [SerializeField] float yMonth;
+    public float Ymonth => yMonth;
     [SerializeField] string monthString => GetMonthString(yMonth);
     [SerializeField] float zYear;
     public string LocationName {
