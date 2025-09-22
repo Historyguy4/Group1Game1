@@ -284,7 +284,7 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_RaycastPadding: {x: -10, y: -10, z: -10, w: -10}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -322,6 +322,8 @@ MonoBehaviour:
   mode: 0
   pointer: {fileID: 242883812}
   angularDeadzoneDeg: 0.5
+  angularHysteresisDeg: 0.4
+  pointerSmoothingTime: 0.06
   linearDeadzonePx: 1
   onDeltaDegrees:
     m_PersistentCalls:
@@ -1220,26 +1222,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   locationText: {fileID: 516419892}
   locations:
-  - locationName: Location1
+  - locationName: Lost Wish
     xDay: -1.72
     yMonth: 2.15
     zYear: 0.52
     videoClip: {fileID: 32900000, guid: be38e053fab317147837c9147ecb9481, type: 3}
-  - locationName: Location2
+  - locationName: Vignette
     xDay: -0.28
     yMonth: -3
     zYear: 0.87
     videoClip: {fileID: 32900000, guid: be38e053fab317147837c9147ecb9481, type: 3}
-  - locationName: Location3
+  - locationName: Distant Horizons
     xDay: 4.78
     yMonth: -3.1
     zYear: 0.27
     videoClip: {fileID: 32900000, guid: be38e053fab317147837c9147ecb9481, type: 3}
-  - locationName: Location4
+  - locationName: Change
     xDay: 3.77
     yMonth: 1.8
     zYear: 0.3
     videoClip: {fileID: 32900000, guid: be38e053fab317147837c9147ecb9481, type: 3}
+  starPrefab: {fileID: 3845300042576682831, guid: 00442b2d25d29be47aa5f7a754c98e7e, type: 3}
 --- !u!114 &795076549
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1502,6 +1505,8 @@ MonoBehaviour:
   mode: 2
   pointer: {fileID: 1048855069}
   angularDeadzoneDeg: 0.5
+  angularHysteresisDeg: 0.4
+  pointerSmoothingTime: 0.06
   linearDeadzonePx: 1
   onDeltaDegrees:
     m_PersistentCalls:
@@ -1687,6 +1692,8 @@ MonoBehaviour:
   mode: 0
   pointer: {fileID: 0}
   angularDeadzoneDeg: 0.5
+  angularHysteresisDeg: 0.4
+  pointerSmoothingTime: 0.06
   linearDeadzonePx: 1
   onDeltaDegrees:
     m_PersistentCalls:
@@ -2032,6 +2039,8 @@ MonoBehaviour:
   mode: 1
   pointer: {fileID: 1897215756}
   angularDeadzoneDeg: 0.5
+  angularHysteresisDeg: 0.4
+  pointerSmoothingTime: 0.06
   linearDeadzonePx: 1
   onDeltaDegrees:
     m_PersistentCalls:
