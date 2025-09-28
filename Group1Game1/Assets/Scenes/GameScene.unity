@@ -133,7 +133,7 @@ GameObject:
   - component: {fileID: 224575074}
   - component: {fileID: 224575078}
   m_Layer: 5
-  m_Name: Clock
+  m_Name: ClockComponents
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -187,7 +187,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.80914026, g: 0.81682485, b: 0.8207547, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -243,6 +243,7 @@ GameObject:
   - component: {fileID: 242883814}
   - component: {fileID: 242883813}
   - component: {fileID: 242883815}
+  - component: {fileID: 242883816}
   m_Layer: 5
   m_Name: Pointer
   m_TagString: Untagged
@@ -282,7 +283,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: -10, y: -10, z: -10, w: -10}
   m_Maskable: 1
@@ -328,6 +329,21 @@ MonoBehaviour:
   onDeltaDegrees:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &242883816
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 242883811}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70e71b8d94abbfa4199e2d3e8d4fe06e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hoverCursor: 2
+  customCursor: {fileID: 2800000, guid: cb21e4a76e583aa49a0b780057c2f17c, type: 3}
+  customHotspot: {x: 0, y: 0}
 --- !u!1 &243144451
 GameObject:
   m_ObjectHideFlags: 0
@@ -1157,6 +1173,7 @@ GameObject:
   - component: {fileID: 795076545}
   - component: {fileID: 795076549}
   - component: {fileID: 795076548}
+  - component: {fileID: 795076550}
   m_Layer: 0
   m_Name: Game Manager
   m_TagString: Untagged
@@ -1262,6 +1279,27 @@ MonoBehaviour:
   videoManager: {fileID: 938324324}
   xyDistance: 0.1
   zDistance: 0.1
+--- !u!114 &795076550
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 795076544}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7ac665ee74e197468f84452c2c7e972, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  defaultCursor: {fileID: 2800000, guid: e9737d7b86282e340bfb947ddbe06c9e, type: 3}
+  defaultHotspot: {x: 4, y: 4}
+  pointerCursor: {fileID: 2800000, guid: cb21e4a76e583aa49a0b780057c2f17c, type: 3}
+  pointerHotspot: {x: 8, y: 2}
+  dragCursor: {fileID: 2800000, guid: cb21e4a76e583aa49a0b780057c2f17c, type: 3}
+  dragHotspot: {x: 16, y: 16}
+  forbiddenCursor: {fileID: 2800000, guid: cb21e4a76e583aa49a0b780057c2f17c, type: 3}
+  forbiddenHotspot: {x: 16, y: 16}
+  cursorMode: 0
 --- !u!1 &877768119
 GameObject:
   m_ObjectHideFlags: 0
@@ -1428,6 +1466,7 @@ GameObject:
   - component: {fileID: 1048855071}
   - component: {fileID: 1048855070}
   - component: {fileID: 1048855072}
+  - component: {fileID: 1048855073}
   m_Layer: 5
   m_Name: Knob2
   m_TagString: Untagged
@@ -1469,7 +1508,7 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_RaycastPadding: {x: -5, y: -5, z: -5, w: -5}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -1513,6 +1552,21 @@ MonoBehaviour:
   onDeltaDegrees:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1048855073
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1048855068}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70e71b8d94abbfa4199e2d3e8d4fe06e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hoverCursor: 2
+  customCursor: {fileID: 2800000, guid: cb21e4a76e583aa49a0b780057c2f17c, type: 3}
+  customHotspot: {x: 0, y: 0}
 --- !u!1 &1548513941
 GameObject:
   m_ObjectHideFlags: 0
@@ -1962,6 +2016,7 @@ GameObject:
   - component: {fileID: 1897215758}
   - component: {fileID: 1897215757}
   - component: {fileID: 1897215759}
+  - component: {fileID: 1897215760}
   m_Layer: 5
   m_Name: Knob1
   m_TagString: Untagged
@@ -2003,7 +2058,7 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_RaycastPadding: {x: -5, y: -5, z: -5, w: -5}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -2047,6 +2102,21 @@ MonoBehaviour:
   onDeltaDegrees:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1897215760
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1897215755}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70e71b8d94abbfa4199e2d3e8d4fe06e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hoverCursor: 2
+  customCursor: {fileID: 2800000, guid: cb21e4a76e583aa49a0b780057c2f17c, type: 3}
+  customHotspot: {x: 0, y: 0}
 --- !u!1 &1939822496
 GameObject:
   m_ObjectHideFlags: 0
