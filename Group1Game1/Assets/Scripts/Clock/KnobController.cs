@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class ClockKnobs : MonoBehaviour
+public class KnobController : MonoBehaviour
 {
     [Header("Dials")]
     [SerializeField] private DialController xDial;       // set Mode = LinearX
