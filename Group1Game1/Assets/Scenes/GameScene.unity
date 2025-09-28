@@ -1187,6 +1187,8 @@ MonoBehaviour:
   dialZoomDamp: 8
   dialMoveClamp: 1.5
   dialZoomClamp: 10
+  bounceZoomAtBounds: 1
+  sineEase: 1
   cameraTransform: {fileID: 471616978}
   cameraComponent: {fileID: 471616977}
   cameraText: {fileID: 544100563}
@@ -1774,7 +1776,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
-  m_VertexColorAlwaysGammaSpace: 0
+  m_VertexColorAlwaysGammaSpace: 1
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
@@ -2057,7 +2059,7 @@ GameObject:
   - component: {fileID: 1939822499}
   - component: {fileID: 1939822498}
   m_Layer: 5
-  m_Name: Clock (1)
+  m_Name: 'Clock '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

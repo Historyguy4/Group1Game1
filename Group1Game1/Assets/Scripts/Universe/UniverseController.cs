@@ -27,6 +27,11 @@ public class UniverseController : MonoBehaviour
     [SerializeField] float dialMoveClamp = 1.5f;
     [SerializeField] float dialZoomClamp = 10f;
 
+    [Header("Zoom Bounce")]
+    [SerializeField] bool bounceZoomAtBounds = true;  // toggle behavior
+    [SerializeField, Min(0f)] float sineEase = 1f;     // 0 = hard triangle; 1 = full sine-like
+    float _unboundedZoom;                               // accumulates without clamping
+
     public void OnDialMove(float dx, float dy)
     {
         dialMove.x = Mathf.Clamp(dialMove.x + dx, -dialMoveClamp, dialMoveClamp);
@@ -55,6 +60,9 @@ public class UniverseController : MonoBehaviour
 
     private void Awake()
     {
+        _unboundedZoom = cameraComponent ? cameraComponent.orthographicSize : minZoom;
+        currentZoom = _unboundedZoom;
+
         MinZoom = minZoom;
         MaxZoom = maxZoom;
         MaxX = maxX;
@@ -92,9 +100,32 @@ public class UniverseController : MonoBehaviour
     private void ApplyMovement(Vector2 input, float zoom)
     {
         //Zoom----
-        float newZoom = cameraComponent.orthographicSize + zoom * Time.deltaTime;
-        currentZoom = Mathf.Clamp(newZoom, minZoom, maxZoom);
-        cameraComponent.orthographicSize = currentZoom;
+        if (bounceZoomAtBounds)
+        {
+            // accumulate the raw/unbounded zoom first
+            _unboundedZoom += zoom * Time.deltaTime;
+
+            float range = Mathf.Max(0.0001f, maxZoom - minZoom);
+
+            // Triangle-wave mapping into [min,max]:  min -> max -> min -> ...
+            float tri = Mathf.PingPong(_unboundedZoom - minZoom, range) / range; // 0..1..0
+
+            // sineEase in [0,1]: 0 = pure triangle; 1 = fully cosine-smoothed.
+            float eased = (sineEase <= 0f)
+                ? tri
+                : Mathf.Lerp(tri, 0.5f - 0.5f * Mathf.Cos(Mathf.PI * tri), Mathf.Clamp01(sineEase));
+
+            currentZoom = minZoom + eased * range;
+            cameraComponent.orthographicSize = currentZoom;
+        }
+        else
+        {
+            // Original clamp behavior
+            float newZoom = cameraComponent.orthographicSize + zoom * Time.deltaTime;
+            currentZoom = Mathf.Clamp(newZoom, minZoom, maxZoom);
+            _unboundedZoom = currentZoom; // keep in sync when not bouncing
+            cameraComponent.orthographicSize = currentZoom;
+        }
 
         //Movement----
         float moveScale = Mathf.Lerp(0.05f, 1.0f, currentZoom01) * moveScaleSpeed;
