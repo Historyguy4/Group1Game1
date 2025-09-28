@@ -29,20 +29,9 @@ public class UniverseController : MonoBehaviour
 
     [Header("Zoom Bounce")]
     [SerializeField] bool bounceZoomAtBounds = true;  // toggle behavior
-    [SerializeField, Min(0f)] float sineEase = 1f;     // 0 = hard triangle; 1 = full sine-like
-    float _unboundedZoom;                               // accumulates without clamping
-
-    public void OnDialMove(float dx, float dy)
-    {
-        dialMove.x = Mathf.Clamp(dialMove.x + dx, -dialMoveClamp, dialMoveClamp);
-        dialMove.y = Mathf.Clamp(dialMove.y + dy, -dialMoveClamp, dialMoveClamp);
-    }
-
-    public void OnDialZoom(float dz)
-    {
-        dialZoom = Mathf.Clamp(dialZoom + dz, -dialZoomClamp, dialZoomClamp);
-    }
-
+    [SerializeField, Min(0f)] float sineEase = 1f;    // 0 = hard triangle; 1 = full sine-like
+    float _unboundedZoom;                             // accumulates without clamping
+    
     [Header("References")]
     [SerializeField] Transform cameraTransform;
     [SerializeField] Camera cameraComponent;
@@ -56,7 +45,11 @@ public class UniverseController : MonoBehaviour
     float zoomInput;
 
     Vector2 dialMove;           // accumulated from dials this frame
-    float dialZoom;             // accumulated from dials this frame
+    float dialZoom;
+
+    float currentZoom;
+    float currentZoom01 => Mathf.InverseLerp(minZoom, maxZoom, currentZoom);
+    float currentZoom10 => 1f - currentZoom01; // accumulated from dials this frame
 
     private void Awake()
     {
@@ -90,11 +83,16 @@ public class UniverseController : MonoBehaviour
         universePosition = new Vector3(cameraTransform.position.x, cameraTransform.position.y, cameraComponent.orthographicSize);
         cameraText.text = $"Day: {universePosition.x:0.0} Month: {universePosition.y:0.0} Year: {universePosition.z:0.0}";
     }
+    public void OnDialMove(float dx, float dy)
+    {
+        dialMove.x = Mathf.Clamp(dialMove.x + dx, -dialMoveClamp, dialMoveClamp);
+        dialMove.y = Mathf.Clamp(dialMove.y + dy, -dialMoveClamp, dialMoveClamp);
+    }
 
-
-    float currentZoom;
-    float currentZoom01 => Mathf.InverseLerp(minZoom, maxZoom, currentZoom);
-    float currentZoom10 => 1f - currentZoom01;
+    public void OnDialZoom(float dz)
+    {
+        dialZoom = Mathf.Clamp(dialZoom + dz, -dialZoomClamp, dialZoomClamp);
+    }
 
     //This is where the zoom and movement is applied to the camera
     private void ApplyMovement(Vector2 input, float zoom)
