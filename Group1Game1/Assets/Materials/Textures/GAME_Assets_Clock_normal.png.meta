@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: f89cf04a91a1e774aaaf59d8a2048ac5
+guid: c4b6fd7163c01d94fa1674402348e2c6
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 7187928796360236656
-    second: GAME_Assets_Clock crown 1_0
+      213: 1369218767548441908
+    second: GAME_Assets_Clock_normal_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,23 +100,23 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: GAME_Assets_Clock crown 1_0
+      name: GAME_Assets_Clock_normal_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 377
-        height: 150
+        x: 81
+        y: 81
+        width: 1338
+        height: 1338
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 07e5ad13827a0c360800000000000000
-      internalID: 7187928796360236656
+      spriteID: 435e583f631700310800000000000000
+      internalID: 1369218767548441908
       vertices: []
       indices: 
       edges: []
@@ -125,19 +125,17 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 6de559c1adcf1c347966f19060960795
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
     edges: []
     weights: []
-    secondaryTextures:
-    - texture: {fileID: 2800000, guid: 2cafbf5d64c86b045b25aae85544af6c, type: 3}
-      name: _NormalMap
+    secondaryTextures: []
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      GAME_Assets_Clock crown 1_0: 7187928796360236656
+      GAME_Assets_Clock_normal_0: 1369218767548441908
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
