@@ -858,6 +858,9 @@ MonoBehaviour:
   yPerPixel: 2
   zoomPerDegree: 1
   universe: {fileID: 795076545}
+  knobNotchX: {fileID: 354693415}
+  knobNotchY: {fileID: 39523998}
+  rotateTarget: {fileID: 0}
 --- !u!1 &242883811
 GameObject:
   m_ObjectHideFlags: 0

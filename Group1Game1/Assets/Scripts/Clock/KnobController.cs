@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class KnobController : MonoBehaviour
 {
@@ -19,6 +20,9 @@ public class KnobController : MonoBehaviour
 
     [Header("Targets")]
     [SerializeField] private UniverseController universe;
+    [SerializeField] RawImage knobNotchX;
+    [SerializeField] RawImage knobNotchY;
+    [SerializeField] RectTransform rotateTarget;
 
     private void Reset()
     {
@@ -39,18 +43,58 @@ public class KnobController : MonoBehaviour
         if (zoomPointer) zoomPointer.onDeltaDegrees.RemoveListener(OnZoomDeltaDegrees);
     }
 
+    float currentAngleZ = 0f;
+    private void Update()
+    {
+        //currentAngleZ = Mathf.MoveTowards(currentAngleZ, targetAngleZ, 1 * Time.unscaledDeltaTime);
+        //rotateTarget.localRotation = Quaternion.Euler(0, 0, currentAngleZ);
+
+        if (targetAngleZ != 0f)
+        {
+            //targetAngleZ = Mathf.MoveTowards(targetAngleZ, 0f, 20f * Time.unscaledDeltaTime);
+        }
+    }
+
+    float lastDragTime;
+    float totalX = 0f;
     private void OnXDeltaPixels(float pixelDelta)
     {
         // Right drag = positive; Left drag = negative
         float dx = pixelDelta * xPerPixel;
         universe?.OnDialMove(dx, 0f);
+        if (knobNotchX != null)
+        {
+            totalX += dx;
+            knobNotchX.uvRect = new Rect(knobNotchX.uvRect.x, totalX / 500f, 1, 2);
+        }
+
+        ApplyTiltFromDrag(dx, 0f);
+        lastDragTime = Time.unscaledTime;
     }
 
+    float totalY = 0f;
     private void OnYDeltaPixels(float pixelDelta)
     {
         // Up drag = positive; Down drag = negative
         float dy = pixelDelta * yPerPixel;
         universe?.OnDialMove(0f, dy);
+        if (knobNotchY != null)
+        {
+            totalY += dy;
+            knobNotchY.uvRect = new Rect(knobNotchY.uvRect.x, -totalY / 500f, 1, 2);
+        }
+
+        ApplyTiltFromDrag(0f, dy);
+        lastDragTime = Time.unscaledTime;
+    }
+
+    float targetAngleZ = 0f;
+    const float invSqrt2 = 0.7f;
+    void ApplyTiltFromDrag(float dx, float dy)
+    {
+        float proj45 = (dx + dy) * invSqrt2;
+        float desired = Mathf.Clamp(proj45 * 1, -10, 10);
+        targetAngleZ = Mathf.MoveTowards(45, desired, 1 * Time.unscaledDeltaTime);
     }
 
     private void OnZoomDeltaDegrees(float deltaDegrees)
