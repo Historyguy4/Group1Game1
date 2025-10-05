@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.Video;
+using static UnityEngine.Rendering.DebugManager;
 
 public class VideoManager : MonoBehaviour
 {
@@ -8,9 +9,11 @@ public class VideoManager : MonoBehaviour
     [SerializeField] UniverseController universeController;
     [SerializeField] GameObject videoScreen;
     [SerializeField] VideoPlayer videoPlayer;
+    [SerializeField] LocationManager locationManager;
 
     [Header("UI")]
     [SerializeField] GameObject interactionPanel; // assign your InteractionPanel here
+    [SerializeField] UIFade uiFade;
 
     void Awake()
     {
@@ -27,12 +30,18 @@ public class VideoManager : MonoBehaviour
 
     private void OnVideoFinished(VideoPlayer source)
     {
-        if (videoScreen) videoScreen.SetActive(false);
 
-        // Show the interaction panel and freeze player/world input until user closes it
-        if (interactionPanel) interactionPanel.SetActive(true);
+        uiFade.FadeIn(() =>
+        {
+            if (videoScreen) videoScreen.SetActive(false);
 
-        if (universeController) universeController.StopMovement();
+            // Show the interaction panel and freeze player/world input until user closes it
+            if (interactionPanel) interactionPanel.SetActive(true);
+
+            if (universeController) universeController.StopMovement();
+
+            uiFade.FadeOut();
+        });
     }
 
     public void PlayVideo(VideoClip clip)
@@ -55,5 +64,7 @@ public class VideoManager : MonoBehaviour
     {
         if (interactionPanel) interactionPanel.SetActive(false);
         if (universeController) universeController.StartMovement();
+
+        locationManager.CheckWin();
     }
 }
