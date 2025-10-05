@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.Video;
 
 public class LocationManager : MonoBehaviour
@@ -12,7 +11,6 @@ public class LocationManager : MonoBehaviour
     public List<LocationInSpace> Locations => locations;
 
     [SerializeField] GameObject starPrefab;
-    [SerializeField] UIFade uiFade;
 
     private void Start()
     {
@@ -34,24 +32,6 @@ public class LocationManager : MonoBehaviour
         }
 
         locationText.text = newList;
-    }
-
-    public void CheckWin()
-    {
-        int i = 0;
-
-        foreach (var loc in locations)
-        {
-            if(loc.VisitedLocation) i++;
-        }
-
-        if (i >= locations.Count)
-        {
-            uiFade.FadeIn(() =>
-            {
-                SceneManager.LoadScene("EndScene");
-            });
-        }
     }
 }
 

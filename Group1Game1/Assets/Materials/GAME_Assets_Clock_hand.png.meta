@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 9be945b31d7188340bfbf1b671e17c09
+guid: 915462dff50c73d48a28d4c4f4ceff64
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -8496310808440745037
-    second: GAME_ASSET_Star (1)_0
+      213: 8961171552420428909
+    second: GAME_Assets_Clock_hand_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: GAME_ASSET_Star (1)_0
+      name: GAME_Assets_Clock_hand_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 1000
-        height: 1000
+        x: 716
+        y: 724
+        width: 61
+        height: 618
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 3b3d399c55a071a80800000000000000
-      internalID: -8496310808440745037
+      spriteID: d6cfa517c0a7c5c70800000000000000
+      internalID: 8961171552420428909
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      GAME_ASSET_Star (1)_0: -8496310808440745037
+      GAME_Assets_Clock_hand_0: 8961171552420428909
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

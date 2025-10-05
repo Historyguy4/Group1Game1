@@ -9,9 +9,6 @@ public class UniverseController : MonoBehaviour
     [Min(0f), SerializeField] float moveScaleSpeed = 100f;
     [Min(0f), SerializeField] float zoomSpeed = 5f;
 
-    [Min(0f), SerializeField] float moveSpeedClock = 5f;
-    [Min(0f), SerializeField] float zoomSpeedClock = 5f;
-
     [Header("Constraints")]
     [Min(0f), SerializeField] float minZoom = 1f;
     public static float MinZoom;
@@ -88,13 +85,13 @@ public class UniverseController : MonoBehaviour
     }
     public void OnDialMove(float dx, float dy)
     {
-        dialMove.x = Mathf.Clamp(dialMove.x + dx, -dialMoveClamp, dialMoveClamp) * moveSpeedClock;
-        dialMove.y = Mathf.Clamp(dialMove.y + dy, -dialMoveClamp, dialMoveClamp) * moveSpeedClock;
+        dialMove.x = Mathf.Clamp(dialMove.x + dx, -dialMoveClamp, dialMoveClamp);
+        dialMove.y = Mathf.Clamp(dialMove.y + dy, -dialMoveClamp, dialMoveClamp);
     }
 
     public void OnDialZoom(float dz)
     {
-        dialZoom = Mathf.Clamp(dialZoom + dz, -dialZoomClamp, dialZoomClamp) * zoomSpeedClock;
+        dialZoom = Mathf.Clamp(dialZoom + dz, -dialZoomClamp, dialZoomClamp);
     }
 
     //This is where the zoom and movement is applied to the camera

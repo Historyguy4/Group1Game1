@@ -16,7 +16,6 @@ public class MainMenu : MonoBehaviour
 
     [Header("Scene To Load")]
     [SerializeField] private string gameSceneName = "GameScene";
-    [SerializeField] UIFade uiFade;
 
     private void Awake()
     {
@@ -36,12 +35,7 @@ public class MainMenu : MonoBehaviour
             return;
         }
 
-        //SceneManager.LoadScene(gameSceneName);
-
-        uiFade.FadeIn(() =>
-        {
-            SceneManager.LoadScene(gameSceneName);
-        });
+        SceneManager.LoadScene(gameSceneName);
     }
 
     private void OnClickCredits()
