@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class VisitationManager : MonoBehaviour
 {
@@ -7,6 +8,7 @@ public class VisitationManager : MonoBehaviour
     [SerializeField] VideoManager videoManager;
     [SerializeField] float xyDistance;
     [SerializeField] float zDistance;
+    [SerializeField] UIFade uiFade;
 
     void Update()
     {
@@ -15,7 +17,14 @@ public class VisitationManager : MonoBehaviour
             if (location.InRange(universeController.UniversePosition, xyDistance, xyDistance, zDistance))
             {
                 universeController.StopMovement();
-                videoManager.PlayVideo(location.visitLocation());
+
+                var video = location.visitLocation();
+
+                uiFade.FadeIn(() =>
+                {
+                    videoManager.PlayVideo(video);
+                    uiFade.FadeOut();
+                });
             }
         }
     }
